@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Locationapp</string>
+    <string name="title_activity_places_list_adapter">PlacesListAdapter</string>
+</resources>
