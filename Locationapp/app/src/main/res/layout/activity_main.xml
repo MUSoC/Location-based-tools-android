@@ -24,4 +24,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="30dp" />
+
+    <Button
+        android:text="ADD A NEW PLACE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/places_list"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:id="@+id/button2"
+        android:onClick="onAddPlaceButtonClicked" />
+
+    <CheckBox
+        android:text="Access Location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="49dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginTop="17dp"
+        android:id="@+id/location_permission_checkbox"
+        android:layout_below="@+id/button2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onLocationPermissionClicked" />
 </RelativeLayout>
