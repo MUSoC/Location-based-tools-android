@@ -10,11 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.location.places.PlaceBuffer;
+
 public class PlacesListAdapter  extends RecyclerView.Adapter<PlacesListAdapter.PlaceViewHolder>  {
     private Context mContext;
-
-    public PlacesListAdapter(Context context) {
+    private PlaceBuffer mPlaces;
+    public PlacesListAdapter(Context context,PlaceBuffer places) {
         this.mContext = context;
+        this.mPlaces=places;
     }
 
 
@@ -26,11 +29,22 @@ public class PlacesListAdapter  extends RecyclerView.Adapter<PlacesListAdapter.P
         return new PlaceViewHolder(view);
     }
     public void onBindViewHolder(PlaceViewHolder holder, int position) {
-
+        String placeName = mPlaces.get(position).getName().toString();
+        String placeAddress = mPlaces.get(position).getAddress().toString();
+        holder.nameTextView.setText(placeName);
+        holder.addressTextView.setText(placeAddress);
+    }
+    public void swapPlaces(PlaceBuffer newPlaces){
+        mPlaces = newPlaces;
+        if (mPlaces != null) {
+            // Force the RecyclerView to refresh
+            this.notifyDataSetChanged();
+        }
     }
     public int getItemCount() {
-        return 0;
-    }
+        if(mPlaces==null) return 0;
+        return mPlaces.getCount();
+        }
     class PlaceViewHolder extends RecyclerView.ViewHolder {
 
         TextView nameTextView;
