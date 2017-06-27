@@ -47,4 +47,14 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:onClick="onLocationPermissionClicked" />
+
+    <Switch
+        android:text="Enable "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:id="@+id/enable_switch"
+        android:layout_below="@+id/location_permission_checkbox"
+        android:layout_alignLeft="@+id/location_permission_checkbox"
+        android:layout_alignStart="@+id/location_permission_checkbox" />
 </RelativeLayout>
