@@ -25,7 +25,9 @@
             android:name="com.example.manya.locationapp.provider.PlaceContentProvider"
             android:authorities="com.example.manya.locationapp"
             android:exported="false"/>
+            <receiver android:name=".GeofenceBroadcastReceiver">
 
+            </receiver>
     </application>
 
 </manifest>
