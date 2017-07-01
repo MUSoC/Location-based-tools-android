@@ -102,6 +102,7 @@ public class Geofencing implements ResultCallback {
             return mGeofencePendingIntent;
         }
         Intent intent = new Intent(mContext, GeofenceBroadcastReceiver.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mGeofencePendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.
                 FLAG_UPDATE_CURRENT);
         return mGeofencePendingIntent;

@@ -48,13 +48,21 @@
         android:layout_alignParentEnd="true"
         android:onClick="onLocationPermissionClicked" />
 
-    <Switch
-        android:text="Enable "
+    <CheckBox
+        android:text="Enable Ringer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:id="@+id/enable_switch"
+        android:id="@+id/ringer_permissions_checkbox"
         android:layout_below="@+id/location_permission_checkbox"
         android:layout_alignLeft="@+id/location_permission_checkbox"
         android:layout_alignStart="@+id/location_permission_checkbox" />
+
+    <Switch
+        android:text="Enable Place Detetion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/enable_switch"
+        android:layout_below="@+id/ringer_permissions_checkbox"
+        android:layout_alignLeft="@+id/ringer_permissions_checkbox"
+        android:layout_alignStart="@+id/ringer_permissions_checkbox" />
 </RelativeLayout>
