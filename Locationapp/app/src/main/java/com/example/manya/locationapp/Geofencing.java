@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.manya.locationapp.service.PlacesIntentService;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Result;
 import com.google.android.gms.common.api.ResultCallback;
@@ -14,6 +15,7 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.Geofence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,9 +103,9 @@ public class Geofencing implements ResultCallback {
         if (mGeofencePendingIntent != null) {
             return mGeofencePendingIntent;
         }
-        Intent intent = new Intent(mContext, GeofenceBroadcastReceiver.class);
+        Intent intent = new Intent(mContext, PlacesIntentService.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mGeofencePendingIntent = PendingIntent.getBroadcast(mContext, 0, intent, PendingIntent.
+        mGeofencePendingIntent = PendingIntent.getService(mContext, 0, intent, PendingIntent.
                 FLAG_UPDATE_CURRENT);
         return mGeofencePendingIntent;
     }

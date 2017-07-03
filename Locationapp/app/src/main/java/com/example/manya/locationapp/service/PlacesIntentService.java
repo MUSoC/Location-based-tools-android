@@ -1,32 +1,42 @@
-package com.example.manya.locationapp;
+package com.example.manya.locationapp.service;
 
+import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.manya.locationapp.MainActivity;
+import com.example.manya.locationapp.R;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
+import com.google.android.gms.location.GeofencingRequest;
+
+import com.example.manya.locationapp.GeofenceBroadcastReceiver;
+
+import static android.content.ContentValues.TAG;
 
 /**
- * Created by Manya on 27/06/2017.
+ * Created by Manya on 02/07/2017.
  */
 
-public class GeofenceBroadcastReceiver extends BroadcastReceiver {
-    public static final String TAG = GeofenceBroadcastReceiver.class.getSimpleName();
+public class PlacesIntentService extends IntentService {
+
+
+    public PlacesIntentService() {
+        super("PlacesIntentService");
+    }
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        //Log.i(TAG,"broadcast received");
+    protected void onHandleIntent(Intent intent) {
         GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
+        Context mContext = getApplicationContext();
         if (geofencingEvent.hasError()) {
             Log.e(TAG, String.format("Error code : %d", geofencingEvent.getErrorCode()));
             return;
@@ -34,17 +44,16 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         //Whenever user enters/exits from any geofence an intent will be send from PendingIntent request and we then extract the transition
         int geofenceTransition = geofencingEvent.getGeofenceTransition();
         if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER) {
-            setRingerMode(context, AudioManager.RINGER_MODE_SILENT);//set phone on silent mode on entry
+            setRingerMode(mContext, AudioManager.RINGER_MODE_SILENT);//set phone on silent mode on entry
         } else if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
-            setRingerMode(context, AudioManager.RINGER_MODE_NORMAL);//set phone on normal mode on exit
+            setRingerMode(mContext, AudioManager.RINGER_MODE_NORMAL);//set phone on normal mode on exit
         } else {
             // Log the error.
             Log.e(TAG, String.format("Unknown transition : %d", geofenceTransition));
             return;
         }
-        sendNotification(context, geofenceTransition);
+        sendNotification(mContext, geofenceTransition);
     }
-
     private void sendNotification(Context context, int transitionType) {
         // Create an explicit content Intent that starts the main Activity.
         Intent notificationIntent = new Intent(context, MainActivity.class);
@@ -92,9 +101,6 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         // Issue the notification
         mNotificationManager.notify(0, builder.build());
     }
-
-
-
     private void setRingerMode(Context context, int mode) {
         try {
             if (Build.VERSION.SDK_INT < 23) {
@@ -124,7 +130,3 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         }
     }
 }
-
-
-
-

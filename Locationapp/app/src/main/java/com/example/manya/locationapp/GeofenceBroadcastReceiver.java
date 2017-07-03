@@ -42,12 +42,13 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
             Log.e(TAG, String.format("Unknown transition : %d", geofenceTransition));
             return;
         }
+        sendNotification(context, geofenceTransition);
     }
 
     private void sendNotification(Context context, int transitionType) {
         // Create an explicit content Intent that starts the main Activity.
         Intent notificationIntent = new Intent(context, MainActivity.class);
-
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         // Construct a task stack.
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
 
@@ -97,8 +98,8 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
     private void setRingerMode(Context context, int mode) {
         try {
             if (Build.VERSION.SDK_INT < 23) {
-                AudioManager audioManager = (AudioManager)context.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-                audioManager.setRingerMode(mode);
+                AudioManager audio = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                audio.setRingerMode(0);
             } else if( Build.VERSION.SDK_INT >= 23 ) {
                 this.requestDoNotDisturbPermissionOrSetDoNotDisturbApi23AndUp(context,mode);
             }
@@ -117,6 +118,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         } else {
             // Ask the user to grant access
             Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
 
         }
