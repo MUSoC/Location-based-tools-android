@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manya.locationapp.service.PlacesIntentService;
@@ -57,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RecyclerView = (RecyclerView) findViewById(R.id.places_list);
+        TextView tx = (TextView)findViewById(R.id.locations);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/LongTime.ttf");
+
+        tx.setTypeface(custom_font);
+
         RecyclerView.setLayoutManager(new LinearLayoutManager(this));
         Adapter = new PlacesListAdapter(this,null);
         RecyclerView.setAdapter(Adapter);
