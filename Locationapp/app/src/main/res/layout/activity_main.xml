@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -8,13 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/back"
     tools:context="com.example.manya.locationapp.MainActivity">
-
-    <TextView
-        android:id="@+id/locations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Locations" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/places_list"
@@ -26,13 +22,14 @@
         android:layout_marginTop="30dp" />
 
     <Button
-        android:text="ADD A NEW PLACE"
+        android:text="ADD NEW LOCATION"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/places_list"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="29dp"
         android:id="@+id/button2"
+
         android:onClick="onAddPlaceButtonClicked" />
 
     <CheckBox
@@ -57,12 +54,31 @@
         android:layout_alignLeft="@+id/location_permission_checkbox"
         android:layout_alignStart="@+id/location_permission_checkbox" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/loc"
+        android:id="@+id/imageView3"
+        android:layout_below="@+id/button2"
+        android:layout_toStartOf="@+id/location_permission_checkbox" />
+
     <Switch
         android:text="Enable Place Detetion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/enable_switch"
         android:layout_below="@+id/ringer_permissions_checkbox"
-        android:layout_alignLeft="@+id/ringer_permissions_checkbox"
-        android:layout_alignStart="@+id/ringer_permissions_checkbox" />
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/locations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Locations"
+        tools:textColorHighlight="@color/common_google_signin_btn_text_light_pressed"
+        tools:textSize="24sp"
+        android:textStyle="normal|bold|italic"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/button2" />
+
 </RelativeLayout>
